@@ -8,6 +8,12 @@
  * @version 
  */
 public class Loader
-{
+{   
+    /**
+     * Loads the structures from the file of user's choosing. 
+     */
+    public void load(){
+        System.out.println("This shows we made it to load method"); 
+    }
     
 }
