@@ -28,10 +28,11 @@ public class P4Program
      * 
      */
     public P4Program(){
+        running = true; 
         keyboard = new Scanner(System.in); 
         timer = new Timer(); 
         loader = new Loader(); 
-        running = true; 
+        
     }
     /**
      * 
@@ -51,7 +52,7 @@ public class P4Program
                        filename = takeInput(); 
                        break; 
             case "b" : if(filename != null){
-                            System.out.println("Loading from " + filename); 
+                            System.out.println("Loading from " + filename + LS); 
                             timer.start(); 
                             loader.load(); 
                             timer.stop(); 
@@ -80,9 +81,9 @@ public class P4Program
      * Get's input from what the user typed
      */
     private String takeInput(){
-        String userInput = ""; 
+        String userInput = null; 
         try{
-            keyboard.nextLine(); 
+            userInput = keyboard.nextLine(); 
         } catch(Exception ex){
             System.out.println("Input error - try again"); 
         }
@@ -95,6 +96,8 @@ public class P4Program
      */
     public static void main(String[] args){
         P4Program p4 = new P4Program(); 
-        p4.menuActions();
+        while(p4.running){
+            p4.menuActions();
+        }
     }
 }
