@@ -18,6 +18,14 @@ public class P4Program
     Timer timer; 
     Loader loader; 
     
+    Stack javaStack; 
+    LinkedList javaLinkedStack; 
+    MyLinkedStack myStack;
+    LinkedList javaLinkedQueue; 
+    MyLinkedQueue myQueue;
+    MyDoublyLinkedList doublyLinked; 
+    
+    
     String filename;
     String stats; 
     String LS = System.lineSeparator(); 
@@ -28,10 +36,11 @@ public class P4Program
      * 
      */
     public P4Program(){
+        running = true; 
         keyboard = new Scanner(System.in); 
         timer = new Timer(); 
-        loader = new Loader(); 
-        running = true; 
+        
+        
     }
     /**
      * 
@@ -49,13 +58,48 @@ public class P4Program
         switch(menuChoice){
             case "a" : System.out.println("Please input a file name"); 
                        filename = takeInput(); 
+                       loader = new Loader(filename); 
                        break; 
             case "b" : if(filename != null){
-                            System.out.println("Loading from " + filename); 
+                            System.out.println("Loading from " + filename + LS);
+                            stats = "There are " + loader.count() + "words in the list." + LS; 
+                            
+                            javaStack = new Stack(); 
                             timer.start(); 
-                            loader.load(); 
+                            javaStack = loader.loadJavaStack(javaStack); 
                             timer.stop(); 
-                            stats += "Load time: " + timer.reportTimes(); 
+                            stats += "Stack - Stack<> class:    " + timer.reportTimes() + LS; 
+                            
+                            javaLinkedStack = new LinkedList(); 
+                            timer.start(); 
+                            javaLinkedStack = loader.loadLinkedList(javaLinkedStack); 
+                            timer.stop(); 
+                            stats += "Stack - LinkedList<>: " + timer.reportTimes() + LS; 
+                            
+                            myStack = new MyLinkedStack(); 
+                            timer.start(); 
+                            myStack = loader.loadMyStack(myStack); 
+                            timer.stop(); 
+                            stats += "Stack - simple linked list:    " + timer.reportTimes() + LS; 
+                            
+                            javaLinkedQueue = new LinkedList(); 
+                            timer.start(); 
+                            javaLinkedQueue = loader.loadLinkedList(javaLinkedQueue); 
+                            timer.stop(); 
+                            stats += "Queue - LinkedList<>: " + timer.reportTimes() + LS; 
+                            
+                            myQueue = new MyLinkedQueue(); 
+                            timer.start(); 
+                            myQueue = loader.loadMyQueue(myQueue); 
+                            timer.stop(); 
+                            stats += "Queue - simple linked list: " + timer.reportTimes() + LS; 
+                            
+                            doublyLinked = new MyDoublyLinkedList(); 
+                            timer.start();
+                            doublyLinked = loader.loadMyDoublyLinkedList(doublyLinked); 
+                            timer.stop(); 
+                            stats += "Doubly list:          " + timer.reportTimes() + LS;  
+                            
                        } else System.out.println("You haven't entered a filename");
                        break;  
             case "c" : System.out.println("search by word");
@@ -80,9 +124,9 @@ public class P4Program
      * Get's input from what the user typed
      */
     private String takeInput(){
-        String userInput = ""; 
+        String userInput = null; 
         try{
-            keyboard.nextLine(); 
+            userInput = keyboard.nextLine(); 
         } catch(Exception ex){
             System.out.println("Input error - try again"); 
         }
@@ -95,6 +139,8 @@ public class P4Program
      */
     public static void main(String[] args){
         P4Program p4 = new P4Program(); 
-        p4.menuActions();
+        while(p4.running){
+            p4.menuActions();
+        }
     }
 }
