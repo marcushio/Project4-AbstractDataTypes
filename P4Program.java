@@ -62,31 +62,32 @@ public class P4Program
                        break; 
             case "b" : if(filename != null){
                             System.out.println("Loading from " + filename + LS);
-                            stats = "There are " + loader.count() + "words in the list." + LS; 
+                            int count = loader.count();
+                            stats = "There are " + count + "words in the list." + LS; 
                             
                             javaStack = new Stack(); 
                             timer.start(); 
                             javaStack = loader.loadJavaStack(javaStack); 
                             timer.stop(); 
-                            stats += "Stack - Stack<> class:    " + timer.reportTimes() + LS; 
+                            stats += "Stack - Stack<> class:       " + timer.reportTimes() + LS; 
                             
                             javaLinkedStack = new LinkedList(); 
                             timer.start(); 
                             javaLinkedStack = loader.loadLinkedList(javaLinkedStack); 
                             timer.stop(); 
-                            stats += "Stack - LinkedList<>: " + timer.reportTimes() + LS; 
+                            stats += "Stack - LinkedList<>:        " + timer.reportTimes() + LS; 
                             
                             myStack = new MyLinkedStack(); 
                             timer.start(); 
                             myStack = loader.loadMyStack(myStack); 
                             timer.stop(); 
-                            stats += "Stack - simple linked list:    " + timer.reportTimes() + LS; 
+                            stats += "Stack - simple linked list:  " + timer.reportTimes() + LS; 
                             
                             javaLinkedQueue = new LinkedList(); 
                             timer.start(); 
                             javaLinkedQueue = loader.loadLinkedList(javaLinkedQueue); 
                             timer.stop(); 
-                            stats += "Queue - LinkedList<>: " + timer.reportTimes() + LS; 
+                            stats += "Queue - LinkedList<>:        " + timer.reportTimes() + LS; 
                             
                             myQueue = new MyLinkedQueue(); 
                             timer.start(); 
@@ -98,7 +99,7 @@ public class P4Program
                             timer.start();
                             doublyLinked = loader.loadMyDoublyLinkedList(doublyLinked); 
                             timer.stop(); 
-                            stats += "Doubly list:          " + timer.reportTimes() + LS;  
+                            stats += "Doubly list:                " + timer.reportTimes() + LS;  
                             
                        } else System.out.println("You haven't entered a filename");
                        break;  
