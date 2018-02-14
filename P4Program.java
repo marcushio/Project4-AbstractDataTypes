@@ -103,8 +103,18 @@ public class P4Program
                             
                        } else System.out.println("You haven't entered a filename");
                        break;  
-            case "c" : System.out.println("search by word");
-                       break; 
+            case "c" : System.out.println("Please enter a term to search for");
+                       String searchTerm = takeInput(); 
+                       try{
+                           if(javaLinkedStack.contains(searchTerm) && javaLinkedQueue.contains(searchTerm) && doublyLinked.contains(searchTerm)){
+                               System.out.println(searchTerm + " found at " + LS + 
+                                                  "Stack - " + javaLinkedStack.indexOf(searchTerm) + LS + 
+                                                  "Queue - " + javaLinkedQueue.indexOf(searchTerm) + LS);
+                           }
+                       }catch(Exception ex){
+                           System.out.println("Error: term not found"); 
+                        }
+                       break;  
             case "d" : System.out.println("search by key"); 
                        break; 
             case "e" : if(stats.equals(null)){
