@@ -18,12 +18,12 @@ public class P4Program
     Timer timer; 
     Loader loader; 
     
-    Stack javaStack; 
-    LinkedList javaLinkedStack; 
-    MyLinkedStack myStack;
-    LinkedList javaLinkedQueue; 
-    MyLinkedQueue myQueue;
-    DoublyLinkedList doublyLinked; 
+    Stack<String> javaStack; 
+    LinkedList<String> javaLinkedStack; 
+    MyLinkedStack<String> myStack;
+    LinkedList<String> javaLinkedQueue; 
+    MyLinkedQueue<String> myQueue;
+    DoublyLinkedList<String> doublyLinked; 
     
     
     String filename;
@@ -39,9 +39,7 @@ public class P4Program
     public P4Program(){
         running = true; 
         keyboard = new Scanner(System.in); 
-        timer = new Timer(); 
-        
-        
+        timer = new Timer();
     }
     /**
      * 
@@ -66,37 +64,37 @@ public class P4Program
                             int count = loader.count();
                             stats = "There are " + count + "words in the list." + LS; 
                             
-                            javaStack = new Stack(); 
+                            javaStack = new Stack<String>(); 
                             timer.start(); 
                             javaStack = loader.loadJavaStack(javaStack); 
                             timer.stop(); 
                             stats += "Stack - Stack<> class:       " + timer.reportTimes() + LS; 
                             
-                            javaLinkedStack = new LinkedList(); 
+                            javaLinkedStack = new LinkedList<String>(); 
                             timer.start(); 
                             javaLinkedStack = loader.loadLinkedList(javaLinkedStack); 
                             timer.stop(); 
                             stats += "Stack - LinkedList<>:        " + timer.reportTimes() + LS; 
                             
-                            myStack = new MyLinkedStack(); 
+                            myStack = new MyLinkedStack<String>(); 
                             timer.start(); 
                             myStack = loader.loadMyStack(myStack); 
                             timer.stop(); 
                             stats += "Stack - simple linked list:  " + timer.reportTimes() + LS; 
                             
-                            javaLinkedQueue = new LinkedList(); 
+                            javaLinkedQueue = new LinkedList<String>(); 
                             timer.start(); 
                             javaLinkedQueue = loader.loadLinkedList(javaLinkedQueue); 
                             timer.stop(); 
                             stats += "Queue - LinkedList<>:        " + timer.reportTimes() + LS; 
                             
-                            myQueue = new MyLinkedQueue(); 
+                            myQueue = new MyLinkedQueue<String>(); 
                             timer.start(); 
                             myQueue = loader.loadMyQueue(myQueue); 
                             timer.stop(); 
                             stats += "Queue - simple linked list:  " + timer.reportTimes() + LS; 
                             
-                            doublyLinked = new DoublyLinkedList(); 
+                            doublyLinked = new DoublyLinkedList<String>(); 
                             timer.start();
                             doublyLinked = loader.loadMyDoublyLinkedList(doublyLinked); 
                             timer.stop(); 
