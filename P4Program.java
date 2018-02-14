@@ -100,7 +100,7 @@ public class P4Program
                             timer.start();
                             doublyLinked = loader.loadMyDoublyLinkedList(doublyLinked); 
                             timer.stop(); 
-                            stats += "Doubly list:                 " + timer.reportTimes() + LS;  
+                            stats += "Doubly linked list:          " + timer.reportTimes() + LS;  
                             
                        } else System.out.println("You haven't entered a filename");
                        break;  
@@ -127,7 +127,7 @@ public class P4Program
                        } catch(Exception ex){
                            System.out.println("Error: couldn't print to file"); 
                        }
-                       System.out.println("Written to file" + OUTPUT_FILENAME); 
+                       System.out.println("Written to file" + OUTPUT_FILENAME + LS); 
                        break; 
             case "g" : System.out.println("Wasn't this a great program? Goodbye."); 
                        running = false; 
