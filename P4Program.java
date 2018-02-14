@@ -23,7 +23,7 @@ public class P4Program
     MyLinkedStack myStack;
     LinkedList javaLinkedQueue; 
     MyLinkedQueue myQueue;
-    MyDoublyLinkedList doublyLinked; 
+    DoublyLinkedList doublyLinked; 
     
     
     String filename;
@@ -95,7 +95,7 @@ public class P4Program
                             timer.stop(); 
                             stats += "Queue - simple linked list: " + timer.reportTimes() + LS; 
                             
-                            doublyLinked = new MyDoublyLinkedList(); 
+                            doublyLinked = new DoublyLinkedList(); 
                             timer.start();
                             doublyLinked = loader.loadMyDoublyLinkedList(doublyLinked); 
                             timer.stop(); 

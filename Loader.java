@@ -119,7 +119,7 @@ public class Loader
     /**
      * Loads up a doubly linked list from file of user's choosing. 
      */
-    public MyDoublyLinkedList loadMyDoublyLinkedList(MyDoublyLinkedList doublyLinkedList){
+    public DoublyLinkedList loadMyDoublyLinkedList(DoublyLinkedList doublyLinkedList){
         try(Scanner reader = new Scanner(new File(filename))){
             while(reader.hasNext()){
                 doublyLinkedList.add(reader.next()); 
