@@ -27,6 +27,7 @@ public class P4Program
     
     
     String filename;
+    public static final String OUTPUT_FILENAME = "P4Output.txt"; 
     String stats; 
     String LS = System.lineSeparator(); 
     
@@ -93,13 +94,13 @@ public class P4Program
                             timer.start(); 
                             myQueue = loader.loadMyQueue(myQueue); 
                             timer.stop(); 
-                            stats += "Queue - simple linked list: " + timer.reportTimes() + LS; 
+                            stats += "Queue - simple linked list:  " + timer.reportTimes() + LS; 
                             
                             doublyLinked = new DoublyLinkedList(); 
                             timer.start();
                             doublyLinked = loader.loadMyDoublyLinkedList(doublyLinked); 
                             timer.stop(); 
-                            stats += "Doubly list:                " + timer.reportTimes() + LS;  
+                            stats += "Doubly list:                 " + timer.reportTimes() + LS;  
                             
                        } else System.out.println("You haven't entered a filename");
                        break;  
@@ -117,11 +118,16 @@ public class P4Program
                        break;  
             case "d" : System.out.println("search by key"); 
                        break; 
-            case "e" : if(stats.equals(null)){
-                            System.out.println("Nothing has been loaded yet"); 
+            case "e" : if(stats == null){
+                            System.out.println("No data has been collected yet"); 
                        } else System.out.println(stats); 
                        break;    
-            case "f" : System.out.println("write to file"); 
+            case "f" : try(BufferedWriter writer = new BufferedWriter(new FileWriter(new File(OUTPUT_FILENAME), true))){
+                            writer.write(stats);    
+                       } catch(Exception ex){
+                           System.out.println("Error: couldn't print to file"); 
+                       }
+                       System.out.println("Written to file" + OUTPUT_FILENAME); 
                        break; 
             case "g" : System.out.println("Wasn't this a great program? Goodbye."); 
                        running = false; 

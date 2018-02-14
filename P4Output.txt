@@ -1,0 +1,7 @@
+There are 26words in the list.
+Stack - Stack<> class:       0.0016seconds CPU time    0.0010seconds clock time
+Stack - LinkedList<>:        0.0013seconds CPU time    0.0010seconds clock time
+Stack - simple linked list:  0.0026seconds CPU time    0.0020seconds clock time
+Queue - LinkedList<>:        0.0011seconds CPU time    0.0010seconds clock time
+Queue - simple linked list:  0.0020seconds CPU time    0.0020seconds clock time
+Doubly list:                 0.0019seconds CPU time    0.0020seconds clock time
