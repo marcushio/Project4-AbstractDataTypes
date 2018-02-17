@@ -20,7 +20,6 @@ public class Loader
      */
     public Loader(String filename){
         this.filename = filename; 
-    
     }
     
     
@@ -44,7 +43,7 @@ public class Loader
      /**
      * Loads up a Java LinkedList<> queue or stack from file of user's choosing.
      */
-    public LinkedList loadLinkedQueue(LinkedList list){
+    public LinkedList<String> loadLinkedQueue(LinkedList<String> list){
         try(Scanner reader = new Scanner(new File(filename))){
             while(reader.hasNext()){
                 list.add(reader.next()); 
@@ -59,7 +58,7 @@ public class Loader
     /**
      * Loads up a Java Stack<> from the file of user's choosing. 
      */
-    public Stack loadJavaStack(Stack stack){
+    public Stack<String> loadJavaStack(Stack<String> stack){
         try(Scanner reader = new Scanner(new File(filename))){
             while(reader.hasNext()){
                 stack.push(reader.next()); 
@@ -74,7 +73,7 @@ public class Loader
     /**
      * Loads a Java LinkedList<> stack from the file of user's choosing. 
      */
-    public LinkedList loadLinkedStack(LinkedList stack){
+    public LinkedList<String> loadLinkedStack(LinkedList<String> stack){
         try(Scanner reader = new Scanner(new File(filename))){
             while(reader.hasNext()){
                 stack.push(reader.next()); 
@@ -89,7 +88,7 @@ public class Loader
     /**
      * Loads up a simple linked list stack from file of user's choosing.
      */
-    public MyLinkedStack loadMyStack(MyLinkedStack stack){
+    public MyLinkedStack<String> loadMyStack(MyLinkedStack<String> stack){
         try(Scanner reader = new Scanner(new File(filename))){
             while(reader.hasNext()){
                 stack.push(reader.next()); 
@@ -104,7 +103,7 @@ public class Loader
     /**
      * Loads up a simple linked list queue from file of user's choosing.
      */
-    public MyLinkedQueue loadMyQueue(MyLinkedQueue queue){
+    public MyLinkedQueue<String> loadMyQueue(MyLinkedQueue<String> queue){
          try(Scanner reader = new Scanner(new File(filename))){
             while(reader.hasNext()){
                 queue.enqueue(reader.next()); 
@@ -119,7 +118,7 @@ public class Loader
     /**
      * Loads up a doubly linked list from file of user's choosing. 
      */
-    public DoublyLinkedList loadMyDoublyLinkedList(DoublyLinkedList doublyLinkedList){
+    public DoublyLinkedList<String> loadMyDoublyLinkedList(DoublyLinkedList<String> doublyLinkedList){
         try(Scanner reader = new Scanner(new File(filename))){
             while(reader.hasNext()){
                 doublyLinkedList.add(reader.next()); 
