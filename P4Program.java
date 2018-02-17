@@ -72,7 +72,7 @@ public class P4Program
                             
                             javaLinkedStack = new LinkedList<String>(); 
                             timer.start(); 
-                            javaLinkedStack = loader.loadLinkedList(javaLinkedStack); 
+                            javaLinkedStack = loader.loadLinkedStack(javaLinkedStack); 
                             timer.stop(); 
                             stats += "Stack - LinkedList<>:        " + timer.reportTimes() + LS; 
                             
@@ -84,7 +84,7 @@ public class P4Program
                             
                             javaLinkedQueue = new LinkedList<String>(); 
                             timer.start(); 
-                            javaLinkedQueue = loader.loadLinkedList(javaLinkedQueue); 
+                            javaLinkedQueue = loader.loadLinkedQueue(javaLinkedQueue); 
                             timer.stop(); 
                             stats += "Queue - LinkedList<>:        " + timer.reportTimes() + LS; 
                             
@@ -105,16 +105,40 @@ public class P4Program
             case "c" : System.out.println("Please enter a term to search for");
                        String searchTerm = takeInput(); 
                        try{
-                           if(javaLinkedStack.contains(searchTerm) && javaLinkedQueue.contains(searchTerm) && doublyLinked.contains(searchTerm)){
-                               System.out.println(searchTerm + " found at " + LS + 
+                          
+                           timer.start(); 
+                           System.out.println(searchTerm + " found at " + LS + 
                                                   "Stack - " + javaLinkedStack.indexOf(searchTerm) + LS + 
-                                                  "Queue - " + javaLinkedQueue.indexOf(searchTerm) + LS);
-                           }
-                       }catch(Exception ex){
-                           System.out.println("Error: term not found"); 
+                                                  "Queue - " + javaLinkedQueue.indexOf(searchTerm) + LS +
+                                                  "Doubly Linked - " + doublyLinked.indexOf(searchTerm) + LS);
+                          
+                           timer.stop(); 
+                           String result = "Search for "+ searchTerm + " took : " + timer.reportTimes() + LS;
+                           stats += result; 
+                           System.out.println(result); 
+                          
+                       } catch(NoSuchElementException ex){
+                             System.out.println("Element doesn't exist"); 
+                        } catch(Exception ex){
+                           System.out.println("Error term not found. "); 
                         }
                        break;  
-            case "d" : System.out.println("search by key"); 
+            case "d" : System.out.println("Please enter a number key to search by"); 
+                       int searchKey = Integer.parseInt(takeInput()); 
+                       try{
+                           timer.start();
+                           String stackResult = javaLinkedStack.get(searchKey); 
+                           String queueResult = javaLinkedQueue.get(searchKey);
+                           String doublyResult = doublyLinked.get(searchKey); 
+                           timer.stop();
+                           String result = "Stack:  " + stackResult + " found at " + searchKey + " in : " + timer.reportTimes()+ LS + 
+                                           "Queue:  " + queueResult + " found at " + searchKey + " in : " + timer.reportTimes()+ LS + 
+                                           "Doubly: " + doublyResult + " found at " + searchKey + " in : " + timer.reportTimes() + LS; 
+                           stats += result; 
+                           System.out.println(result); 
+                        } catch(Exception ex){
+                            System.out.println("Error: key does not exist"); 
+                        }   
                        break; 
             case "e" : if(stats == null){
                             System.out.println("No data has been collected yet"); 

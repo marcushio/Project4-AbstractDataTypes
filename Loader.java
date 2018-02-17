@@ -44,7 +44,7 @@ public class Loader
      /**
      * Loads up a Java LinkedList<> queue or stack from file of user's choosing.
      */
-    public LinkedList loadLinkedList(LinkedList list){
+    public LinkedList loadLinkedQueue(LinkedList list){
         try(Scanner reader = new Scanner(new File(filename))){
             while(reader.hasNext()){
                 list.add(reader.next()); 

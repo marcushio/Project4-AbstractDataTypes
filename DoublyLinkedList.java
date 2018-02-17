@@ -1,46 +1,28 @@
 
 /**
- * @author Marcus Trujillo
- * Assignment number
- * Brief Description of class MyDoublyLinkedList here.
- * 
- * CS2050-003
- * @version 
+ * A class used for storing values. Each node has access to the next and previous elements in the list. 
+ * @version 1.0
  */
 
-    import java.util.Iterator;
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- *  The {@code LinkedQueue} class represents a first-in-first-out (FIFO)
- *  queue of generic items.
- *  It supports the usual <em>enqueue</em> and <em>dequeue</em>
- *  operations, along with methods for peeking at the first item,
- *  testing if the queue is empty, and iterating through
- *  the items in FIFO order.
- *  <p>
- *  This implementation uses a singly linked list with a non-static nested class 
- *  for linked-list nodes.  See {@link Queue} for a version that uses a static nested class.
- *  The <em>enqueue</em>, <em>dequeue</em>, <em>peek</em>, <em>size</em>, and <em>is-empty</em>
- *  operations all take constant time in the worst case.
- *  <p>
- *  For additional documentation, see <a href="https://algs4.cs.princeton.edu/13stacks">Section 1.3</a> of
- *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
- *
+ *  @author Marcus Trujillo (very minor changes)
  *  @author Robert Sedgewick
  *  @author Kevin Wayne
  */
 public class DoublyLinkedList<Item> implements Iterable<Item> {
-    private int n;         // number of elements on queue
-    private Node first;    // beginning of queue
-    private Node last;     // end of queue
+    private int n;         // number of elements in list
+    private Node first;    // beginning of list
+    private Node last;     // end of list
 
     // helper linked list class
     private class Node {
         private Item item;
         private Node next;
         private Node previous; 
-        private int key; 
+        private int key = n; 
     }
 
     /**
@@ -84,6 +66,7 @@ public class DoublyLinkedList<Item> implements Iterable<Item> {
      * @param item the item to add
      */
     public void add(Item item) {
+        n++;
         Node oldlast = last;
         last = new Node();
         last.item = item;
@@ -93,17 +76,16 @@ public class DoublyLinkedList<Item> implements Iterable<Item> {
         else { oldlast.next = last;
                last.previous = oldlast;        
         }
-        n++;
-        last.key = n; 
         assert check();
     }
 
+    
     /**
      * Removes and returns the item on this queue that was least recently added.
      * @return the item on this queue that was least recently added
      * @throws java.util.NoSuchElementException if this queue is empty
      */
-    public Item dequeue() {
+    public Item remove() {
         if (isEmpty()) throw new NoSuchElementException("Queue underflow");
         Item item = first.item;
         first = first.next;
@@ -112,7 +94,40 @@ public class DoublyLinkedList<Item> implements Iterable<Item> {
         assert check();
         return item;
     }
+    
+    
+    /**
+     * 
+     */
+    public int indexOf(String searchTerm){
+        int index = 0;
+        ListIterator iterator = new ListIterator(); 
+        for(Item entry = iterator.next(); entry != last; entry = iterator.next()){
+            if(searchTerm.equals(entry)){
+                return index; 
+            }
+            index++; 
+        }
+        return -1; 
+    }
 
+    
+    
+    /**
+     * Search by index
+     */
+    public String get(int key){
+        String result = null;
+        ListIterator iterator = new ListIterator(); 
+        try{
+            for(int i = 0; i <= key; i++){
+                result = (String)iterator.next();
+            } 
+        }catch(Exception ex){
+            System.out.println("There is no such element"); 
+        }
+        return result; 
+    }
     /**
      * Returns a string representation of this queue.
      * @return the sequence of items in FIFO order, separated by spaces
