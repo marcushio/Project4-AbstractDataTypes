@@ -97,7 +97,8 @@ public class DoublyLinkedList<Item> implements Iterable<Item> {
     
     
     /**
-     * 
+     * Finds the index of the searchTerm in the list. If term is not present return -1. 
+     * @return index number of the term. -1 if it isn't present.
      */
     public int indexOf(String searchTerm){
         int index = 0;
@@ -110,11 +111,11 @@ public class DoublyLinkedList<Item> implements Iterable<Item> {
         }
         return -1; 
     }
-
     
     
     /**
      * Search by index
+     * @return the string present at that index.
      */
     public String get(int key){
         String result = null;
@@ -128,6 +129,8 @@ public class DoublyLinkedList<Item> implements Iterable<Item> {
         }
         return result; 
     }
+    
+    
     /**
      * Returns a string representation of this queue.
      * @return the sequence of items in FIFO order, separated by spaces

@@ -4,15 +4,6 @@
  * Assignment number
  * Brief Description of class MyLinkedStack here.
  * 
- * CS2050-003
- * @version 
- */
-
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-
-
-/**
  *  The {@code LinkedStack} class represents a last-in-first-out (LIFO) stack of
  *  generic items.
  *  It supports the usual <em>push</em> and <em>pop</em> operations, along with methods
@@ -30,7 +21,14 @@ import java.util.NoSuchElementException;
  *
  *  @author Robert Sedgewick
  *  @author Kevin Wayne
+ *
+ * CS2050-003
+ * @version 1.0
  */
+
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 public class MyLinkedStack<Item> implements Iterable<Item> {
     private int n;          // size of the stack
     private Node first;     // top of stack

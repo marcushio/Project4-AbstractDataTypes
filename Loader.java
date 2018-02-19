@@ -1,8 +1,9 @@
 
 /**
  * @author Marcus Trujillo
- * Assignment number
- * Brief Description of class Loader here.
+ * Assignment number4
+ * Loader loads all the structures with Strings from a text file. It is a smart loader so it has a little extra 
+ * functionality like counter
  * 
  * CS2050-003
  * @version 

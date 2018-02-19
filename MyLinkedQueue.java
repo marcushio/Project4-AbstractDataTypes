@@ -1,16 +1,7 @@
 
 /**
  * @author Marcus Trujillo
- * Assignment number
- * Brief Description of class MyLinkedQueue here.
- * 
- * CS2050-003
- * @version 
- */
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-
-/**
+ * Assignment number 4
  *  The {@code LinkedQueue} class represents a first-in-first-out (FIFO)
  *  queue of generic items.
  *  It supports the usual <em>enqueue</em> and <em>dequeue</em>
@@ -28,7 +19,13 @@ import java.util.NoSuchElementException;
  *
  *  @author Robert Sedgewick
  *  @author Kevin Wayne
+ *
+ * CS2050-003
+ * @version 
  */
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 public class MyLinkedQueue<Item> implements Iterable<Item> {
     private int n;         // number of elements on queue
     private Node first;    // beginning of queue

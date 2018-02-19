@@ -1,0 +1,13 @@
+There are 26 words in the list.
+Stack - Stack<> class:       0.0017 seconds CPU time    0.0020 seconds clock time
+Stack - LinkedList<>:        0.0021 seconds CPU time    0.0030 seconds clock time
+Stack - simple linked list:  0.0015 seconds CPU time    0.0010 seconds clock time
+Queue - LinkedList<>:        0.0006 seconds CPU time    0.0010 seconds clock time
+Queue - simple linked list:  0.0011 seconds CPU time    0.0010 seconds clock time
+Doubly linked list:          0.0011 seconds CPU time    0.0010 seconds clock time
+Search for project in Stack took :        0.0010 seconds CPU time    0.0010 seconds clock time
+Search for project in Queue took :        0.0012 seconds CPU time    0.0010 seconds clock time
+Search for project in Doubly linked took : 0.0046 seconds CPU time    0.0040 seconds clock time
+Stack:  is found at 1 in : 0.0000 seconds CPU time    0.0000 seconds clock time
+Queue:  project found at 1 in : 0.0000 seconds CPU time    0.0000 seconds clock time
+Doubly: project found at 1 in : 0.0000 seconds CPU time    0.0000 seconds clock time

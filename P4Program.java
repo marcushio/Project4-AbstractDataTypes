@@ -5,10 +5,12 @@
  * This assignment deals with implementing the Stack and Queue abstract data types (ADTs). Stack is implemented with the java's LinkedList<> and Stack<> classes,
  * and a simple linked list. Queue is implemented with java's LinkedList<> class and a simple linked list. We also implemented our own DoublyLinkedList. The program 
  * provides the user with the options to a)enter a file they wish to use as input b)fill all the ADTs from the file they entered c)search the ADTs by word d)search
- * the ADTs by index key e)show the timing stats gained from loading and searching f)write the stats to a .txt file and g) lastly, exit the program. 
+ * the ADTs by index key e)show the timing stats gained from loading and searching f)write the stats to a .txt file and g) lastly, exit the program. Program doesn't accept
+ * blank documents. 
+ * Implementations for linked list and doubly linked list used code from Sedgewick's algorithms book as permission to use code from the book was given. 
  * 
  * CS2050-003
- * @version 
+ * 
  */
 
 import java.util.*; 
@@ -28,7 +30,6 @@ public class P4Program
     MyLinkedQueue<String> myQueue;
     DoublyLinkedList<String> doublyLinked; 
     
-    
     String filename;
     public static final String OUTPUT_FILENAME = "P4Output.txt"; 
     String stats; 
@@ -43,24 +44,37 @@ public class P4Program
         running = true; 
         keyboard = new Scanner(System.in); 
         timer = new Timer();
+        stats = "";
     }
+    
+    
     /**
-     * The main menu for the user to select their options from. 
+     * The main menu for the user to select their options from. Each case in switch dispatches the necessary methods for that option. 
      */
     private void menuActions(){
-        System.out.println("Please select an option below by it's designated letter"); 
-        System.out.println("[a] - Input name of file that you will load structures from." + LS + 
+        System.out.println("Please select an option below by its designated letter (case sensitive)"); 
+        System.out.println("[a] - Enter name of file that you will load structures from." + LS + 
                            "[b] - Load all structures from file. " + LS + 
                            "[c] - Search by typing in a word. " + LS + 
                            "[d] - Search by index number." + LS + 
-                           "[e] - Show statistics of the loading process." + LS + 
+                           "[e] - Show statistics." + LS + 
                            "[f] - Write statistics to a .txt file." + LS + 
                            "[g] - Exit the program." + LS); 
         String menuChoice = takeInput(); 
         switch(menuChoice){
             case "a" : System.out.println("Please input a file name"); 
                        filename = takeInput(); 
-                       loader = new Loader(filename); 
+                       try(Scanner scanner = new Scanner(new File(filename))){
+                           scanner.nextLine(); 
+                           loader = new Loader(filename); 
+                       }catch(FileNotFoundException ex){
+                           System.out.println("That file does not exist or is unreadable, try another."); 
+                       }catch(IllegalStateException ex){
+                           System.out.println("Could not read doc. Try again"); 
+                       }catch(NoSuchElementException ex){
+                           System.out.println("File is blank. Invalid");
+                           filename = null; 
+                       }
                        break; 
             case "b" : loadStructures();
                        break;  
@@ -69,8 +83,12 @@ public class P4Program
                        wordSearch(searchTerm); 
                        break;  
             case "d" : System.out.println("Please enter a number key to search by"); 
-                       int searchKey = Integer.parseInt(takeInput()); 
-                       keySearch(searchKey); 
+                       try{
+                           int searchKey = Integer.parseInt(takeInput()); 
+                           System.out.println(keySearch(searchKey)); 
+                       }catch(NumberFormatException ex){ 
+                           System.out.println("Only numeric input is allowed here"); 
+                       }
                        break; 
             case "e" : if(stats == null){
                             System.out.println("No data has been collected yet"); 
@@ -85,8 +103,10 @@ public class P4Program
                        break; 
             case "g" : System.out.println("Wasn't this a great program? Goodbye."); 
                        running = false; 
+                       keyboard.close(); 
                        System.exit(0); 
-                       break;           
+                       break;     
+            default: System.out.println("Invalid input."); 
         }
     }
     
@@ -109,32 +129,34 @@ public class P4Program
     /**
      * Searches the Java LinkedList<> Stack, Java LinkedList<> Queue, and DoublyLinked List for a word
      */
-    private void wordSearch(String searchTerm){
+    private String wordSearch(String searchTerm){
+        String result = "no results made"; 
         try{
-                           if(javaLinkedStack.indexOf(searchTerm) < 0){
-                               System.out.println("Error: Word not present");
-                           } else{
-                               timer.start(); 
-                               System.out.println(searchTerm + " found at " + LS + "Stack : " + javaLinkedStack.indexOf(searchTerm) + LS); 
-                               timer.stop(); 
-                               String result = "Search for "+ searchTerm + " took : " + timer.reportTimes() + LS;
-                               timer.start(); 
-                               System.out.println(searchTerm + " found at " + LS + "Queue : " + javaLinkedQueue.indexOf(searchTerm) + LS); 
-                               timer.stop(); 
-                               result += "Search for "+ searchTerm + " took : " + timer.reportTimes() + LS;
-                               timer.start(); 
-                               System.out.println(searchTerm + " found at " + LS + "Doubly Linked : " + doublyLinked.indexOf(searchTerm) + LS);                      
-                               timer.stop(); 
-                               result += "Search for "+ searchTerm + " took : " + timer.reportTimes() + LS;
-                               stats += result; 
-                               System.out.println(result); 
-                           }
-                       } catch(NoSuchElementException ex){
-                             System.out.println("Element doesn't exist"); 
-                        } catch(Exception ex){
-                           System.out.println("Error term not found. "); 
-                        }
+          if(javaLinkedStack.indexOf(searchTerm) < 0){
+             return "Error: Word not present";
+          } else{
+           timer.start(); 
+           System.out.println(searchTerm + " found at: " + javaLinkedStack.indexOf(searchTerm) + " in Stack" + LS); 
+           timer.stop(); 
+           result = "Search for "+ searchTerm + " in Stack took :        " + timer.reportTimes() + LS;
+           
+           timer.start(); 
+           System.out.println(searchTerm + " found at: " + javaLinkedQueue.indexOf(searchTerm) + " in Queue " + LS); 
+           timer.stop(); 
+           result += "Search for "+ searchTerm + " in Queue took :        " + timer.reportTimes() + LS;
+           
+           timer.start(); 
+           System.out.println(searchTerm + " found at: " + doublyLinked.indexOf(searchTerm) + " in Doubly Linked" + LS);                      
+           timer.stop(); 
+           result += "Search for "+ searchTerm + " in Doubly linked took : " + timer.reportTimes() + LS;
+           stats += result; 
+          }
+        } catch(Exception ex){
+           System.out.println("Error term not found. "); 
+        }
+        return result; 
     }
+    
     
     /**
      * Loads all the structures with the data from the input file. If a data file hasn't been loaded we tell the user this is the case. 
@@ -143,7 +165,7 @@ public class P4Program
         if(filename != null){
             System.out.println("Loading from " + filename + LS);
             int count = loader.count();
-            stats = "There are " + count + "words in the list." + LS; 
+            stats += "There are " + count + " words in the list." + LS; 
                             
             javaStack = new Stack<String>(); 
             timer.start(); 
@@ -180,19 +202,20 @@ public class P4Program
             doublyLinked = loader.loadMyDoublyLinkedList(doublyLinked); 
             timer.stop(); 
             stats += "Doubly linked list:          " + timer.reportTimes() + LS;                
-        } else System.out.println("You haven't entered a filename");
+        } else System.out.println("A valid filename hasn't been entered.");
     }
     
     
     /**
-     * Search by key
+     * Search for a word at the key entered by the user. Stats are taken on the search and the result is printed. 
      */
-    private void keySearch(int searchKey){
+    private String keySearch(int searchKey){
+        String result = "";
         try{
             timer.start();
             String stackResult = javaLinkedStack.get(searchKey);
             timer.stop();
-            String result = "Stack:  " + stackResult + " found at " + searchKey + " in : " + timer.reportTimes()+ LS;
+            result = "Stack:  " + stackResult + " found at " + searchKey + " in : " + timer.reportTimes()+ LS;
                            
             timer.start(); 
             String queueResult = javaLinkedQueue.get(searchKey);
@@ -205,21 +228,20 @@ public class P4Program
             result +=  "Doubly: " + doublyResult + " found at " + searchKey + " in : " + timer.reportTimes() + LS;    
                            
             stats += result; 
-            System.out.println(result); 
-        } catch(Exception ex){
-            System.out.println("Error: key does not exist"); 
-        }   
+        }catch(Exception ex){
+            System.out.println("Error: key does not exist (either because it's not in the structure or you haven't loaded a structure)"); 
+        }  
+        return result;
     }
     
     
-    
     /**
-     * The main method. Simply calls the menu while 
+     * The main method. Simply calls the menu while running is true. 
      */
     public static void main(String[] args){
         P4Program p4 = new P4Program(); 
-        while(p4.running){
+        do{
             p4.menuActions();
-        }
+        }while(p4.running);
     }
 }
